@@ -36,7 +36,7 @@ const MainLayout = () => {
 
             <div className="drawer">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col">
+                <div className="drawer-content flex flex-col overflow-y-auto">
                     {/* Navbar */}
                     <div className="">
                         <div className="w-full navbar max-w-7xl mx-auto justify-between">
@@ -59,7 +59,7 @@ const MainLayout = () => {
                         </div>
                     </div>
 
-                    <div>
+                    <div className="block">
                         <Outlet></Outlet>
                     </div>
                 </div>
