@@ -10,12 +10,12 @@ export const axiosSecure = axios.create({
     withCredentials: true,
 });
 
-const useAxiosSecure = () => {
+const useAxiosSecure = (url) => {
     const {logOut} = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axiosSecure.interceptors.response.use(res => {
+        axiosSecure.get(url).interceptors.response.use(res => {
             return res;
         }, error => {
             console.log("Error tracked in the interceptor", error.response);
