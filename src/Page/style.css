@@ -1,5 +1,23 @@
+
 .login-container {
-    height: 100vh;
     background: url("../assets/images/hand-giving-food-bowl-needy-person.jpg") no-repeat center center;
     background-size: cover;
+}
+
+.social-login-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all ease-in .5s;
+}
+
+.social-login-btn  span {
+    position: absolute;
+    content: "Hello";
+    right: 120px;
+    transition: all ease-in .5s;
+}
+
+.social-login-btn:hover span {
+    position: relative;
+    right: 0;
 }

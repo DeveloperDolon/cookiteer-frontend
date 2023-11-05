@@ -4,9 +4,9 @@ import "./style.css"
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
-import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 
-const Login = () => {
+const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passValidMsg, setPassValidMsg] = useState("Password need to include length 8, Special Character, Capital Letter, Number!");
     const [isValid, setIsValid] = useState(false);
@@ -69,15 +69,27 @@ const Login = () => {
     }
 
     return (
-        <div className="login-container h-screen flex justify-center items-center px-3 py-5">
+        <div className="login-container flex justify-center items-center px-3 py-5">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
                 <form className="card-body mb-0 pb-0">
-                    <h1 className="text-center md:text-4xl font-bold text-2xl">Log in</h1>
+                    <h1 className="text-center md:text-4xl font-bold text-2xl">Register</h1>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input type="text" name="name" placeholder="username" className="input input-bordered" required />
+                    </div>
+                    <div className="form-control">
+                        <label className="label">
+                            <span className="label-text">Photo Url</span>
+                        </label>
+                        <input type="text" name="photoUrl" placeholder="photo url" className="input input-bordered" required/>
+                    </div>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="email" placeholder="email" className="input input-bordered" required />
+                        <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                     </div>
                     <div className="form-control mt-3">
 
@@ -89,6 +101,7 @@ const Login = () => {
                                     *
                                 </span>
                             </label>
+
                             <div className="relative">
                                 <input onChange={handleValidPassword} type={showPassword ? "text" : "password"} id="with-indications" className="mt-1 rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent" name="password" placeholder="Password" required />
 
@@ -96,6 +109,7 @@ const Login = () => {
                                     {showPassword ? <AiFillEyeInvisible className="text-2xl "></AiFillEyeInvisible> : <AiFillEye className="text-2xl "></AiFillEye>}
                                 </span>
                             </div>
+
                             <div ref={verifyRef} className="grid w-full h-1 grid-cols-12 gap-4 mt-3">
                                 <div className="h-full col-span-3 hidden bg-green-500 rounded">
                                 </div>
@@ -112,28 +126,22 @@ const Login = () => {
                                 </p>
                             </div>
                         </div>
-
-                        <div className="">
-                            <label className="label pl-0">
-                                <a className="label-text-alt link link-hover pl-0">Forgot password?</a>
-                            </label>
-                        </div>
                     </div>
                     <div className="form-control mt-2">
                         <button className="btn bg-green-500 text-white border-none hover:text-black">Login</button>
                     </div>
                     <p className="md:text-xs text-xs text-center">
-                        Do not have any account? <Link to="/register" className="font-bold hover:underline text-sky-600">Register</Link>
+                        Already have an account? <Link to="/login" className="font-bold hover:underline text-sky-600">Login</Link>
                     </p>
                     <p className="text-center font-bold">or</p>
                 </form>
 
                 <div className="flex justify-center gap-5 pt-3 pb-5">
                     <button className="btn social-login-btn w-fit duration-500"><FcGoogle className="md:text-3xl text-xl"></FcGoogle>
-                    <span>Google Login</span>
+                        <span>Google Login</span>
                     </button>
                     <button className="btn social-login-btn w-fit duration-500"><BsGithub className="md:text-3xl text-xl"></BsGithub>
-                    <span>Github Login</span>
+                        <span>Github Login</span>
                     </button>
                 </div>
             </div>
@@ -141,6 +149,6 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
 
 
