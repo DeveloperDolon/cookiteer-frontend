@@ -1,7 +1,7 @@
 
 import { useContext, useRef, useState } from "react";
 import "./style.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
@@ -14,6 +14,7 @@ const Login = () => {
     const [isValid, setIsValid] = useState(false);
     const verifyRef = useRef();
     const {loginWithEmailAndPassword} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleValidPassword = (e) => {
         setIsValid(false);
@@ -77,11 +78,12 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        const toastId = toast.loading("Creating User...");
+        const toastId = toast.loading("Finding User...");
 
         loginWithEmailAndPassword(email, password)
         .then(() => {
-            toast.success("User Logged in Successfully!!", { id: toastId })
+            toast.success("User Logged in Successfully!!", { id: toastId });
+            navigate("/");
         }).catch(err => {
             toast.error(err.message, {id: toastId})
         })

@@ -3,17 +3,31 @@ import "./style.css"
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { CiLogout } from 'react-icons/ci';
+import toast from "react-hot-toast";
+import axios from "axios";
 
 const MainLayout = () => {
 
-    const {user} = useContext(AuthContext);
+    const { mainUrl, user, logOut, setUser} = useContext(AuthContext);
     const [showDropdown, setShowDropdown] = useState(false);
-
 
     const handleClick = (e) => {
         if(e.target.id !== "user-img") {
             setShowDropdown(false);
         }
+    }
+
+    const handleLogOut = () => {
+        logOut()
+        .then(() => {
+
+            axios.post(`${mainUrl}/api/v1/logout`,{user: user?.email}, {withCredentials: true})
+            .then(res => console.log(res))
+            .catch(err => console.log(err.message))
+
+            toast.success("Logged out successfully!!")
+            setUser(null);
+        }).catch(err => toast.error(err.message));
     }
   
     const navItems = <>
@@ -71,9 +85,9 @@ const MainLayout = () => {
                                         user ? <div className="relative">
                                             <img id="user-img" onClick={() => setShowDropdown(!showDropdown)} className="rounded-full cursor-pointer outline-green-500 outline-4 outline  md:w-12 w-10 md:h-12 h-10 object-cover" src={user.photoURL} alt="" />
 
-                                            <div className={`absolute duration-500 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} glass py-5 px-6 rounded-lg right-0 top-[110%] z-40 space-y-3`}>
-                                                <p className="whitespace-nowrap font-bold text-white">{user?.displayName}</p>
-                                                <button className="btn btn-sm whitespace-nowrap flex gap-2 flex-nowrap">
+                                            <div className={`absolute duration-500 ${showDropdown ? "opacity-100 visible" : "opacity-0 invisible"} bg-slate-100 py-5 px-6 rounded-lg right-0 top-[110%] z-40 space-y-3`}>
+                                                <p className="whitespace-nowrap font-bold ">{user?.displayName}</p>
+                                                <button onClick={handleLogOut} className="btn btn-sm whitespace-nowrap flex gap-2 flex-nowrap bg-zinc-700 text-white">
                                                     <CiLogout></CiLogout>
                                                     Log Out
                                                 </button>
