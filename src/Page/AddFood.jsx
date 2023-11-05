@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import { axiosSecure } from "../hooks/useExiosSecure";
+import toast from "react-hot-toast";
 
 
 const AddFood = () => {
@@ -7,7 +9,7 @@ const AddFood = () => {
     const {user} = useContext(AuthContext);
 
     const handleAddProduct = (e) => {
-
+        const addProductId = toast.loading("Product adding...");
         e.preventDefault();
 
         const form = e.target;
@@ -18,13 +20,24 @@ const AddFood = () => {
         const pickUpLocation = form.pickUpLocation.value;
         const category = form.category.value;
         const additionalNotes = form.additionalNotes.value;
+        const donarName = user.displayName;
+        const donarEmail = user.email;
 
-        console.log(foodName, foodImage, foodQuantity, expiredDate, pickUpLocation, category, additionalNotes, user.email);
+        const foodInfo = {foodName, foodImage, foodQuantity, expiredDate, pickUpLocation, category, additionalNotes, donarName, donarEmail};
+
+        axiosSecure.post("/api/v1/add-food", {...foodInfo})
+        .then(res => {
+            if(res.data.insertedId) {
+                toast.success("Product added successfully!!", { id: addProductId });
+            }
+        }).catch(err => {
+            console.log(err);
+            toast.error(err.message, {id: addProductId});
+        })
     }
 
     return (
         <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3">
-
             <div
                 style={{
                     background: "url('https://images.pexels.com/photos/4871119/pexels-photo-4871119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center",
@@ -67,12 +80,12 @@ const AddFood = () => {
                         <label htmlFor="category"> Category
                             <select name="category" id="" className="w-full md:py-5 py-2 md:text-base border text-sm rounded-lg px-5 mt-3" required>
                                 <option selected disabled>Select Category</option>
-                                <option value="Politics">Fresh Produce</option>
-                                <option value="Sports">Rice Items</option>
-                                <option value="Entertainment">Dairy & Eggs</option>
-                                <option value="International">Meat & Seafood</option>
-                                <option value="Technology">Pantry Staples</option>
-                                <option value="Health">Snacks & Sweets</option>
+                                <option value="Fresh Produce">Fresh Produce</option>
+                                <option value="Rice Items">Rice Items</option>
+                                <option value="Dairy & Eggs">Dairy & Eggs</option>
+                                <option value="Meat & Seafood">Meat & Seafood</option>
+                                <option value="Fries & Crispy">Fries & Crispy</option>
+                                <option value="Snacks & Sweets">Snacks & Sweets</option>
                                 <option value="Others">Others</option>
                             </select>
                         </label>
