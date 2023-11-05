@@ -1,7 +1,7 @@
 
 import { useContext, useRef, useState } from "react";
 import "./style.css"
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
@@ -14,6 +14,7 @@ const Register = () => {
     const [passValidMsg, setPassValidMsg] = useState("Password need to include length 8, Special Character, Capital Letter, Number!");
     const [isValid, setIsValid] = useState(false);
     const verifyRef = useRef();
+    const navigate = useNavigate();
 
     const {createUser} = useContext(AuthContext);
 
@@ -92,6 +93,7 @@ const Register = () => {
                 photoURL: photoUrl
             }).then(() => {
                 toast.success("User Created Successfully!!", { id: toastId })
+                navigate("/");
             }).catch(err => toast.error(err.message, {id: toastId}))
         }).catch(err => {
             toast.error(err.message, {id: toastId})
