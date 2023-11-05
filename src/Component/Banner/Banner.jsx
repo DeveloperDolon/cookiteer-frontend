@@ -20,7 +20,7 @@ const Banner = () => {
                 <span className="overlay text-white"></span>
 
 
-                <div className="z-50 absolute w-full overflow-x-hidden">
+                <div className="z-40 absolute w-full overflow-x-hidden">
                     <Swiper
                         spaceBetween={30}
                         centeredSlides={true}

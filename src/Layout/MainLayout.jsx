@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
 import "./style.css"
 
 const MainLayout = () => {
@@ -53,7 +53,7 @@ const MainLayout = () => {
                             </div>
                             <div>
                                 <ul className="menu menu-horizontal">
-                                    <button className="btn">Log in</button>
+                                    <Link to="/login" className="btn">Log in</Link>
                                 </ul>
                             </div>
                         </div>
@@ -63,9 +63,9 @@ const MainLayout = () => {
                         <Outlet></Outlet>
                     </div>
                 </div>
-                <div className="drawer-side">
+                <div className="drawer-side z-50">
                     <label htmlFor="my-drawer-3" aria-label="close sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 w-80 min-h-full bg-base-200">
+                    <ul className="menu p-4 w-80 min-h-full bg-base-200 gap-3">
                         {navItems}
                     </ul>
                 </div>
