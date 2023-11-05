@@ -69,8 +69,9 @@ const Login = () => {
     }
 
     return (
-        <div className="login-container h-screen flex justify-center items-center px-3 py-5">
+        <div className="login-container min-h-screen flex justify-center items-center px-3 py-5">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
+            <Link to="/" className="px-3 py-1 text-red-500 font-semibold hover:underline">Go To Home</Link>
                 <form className="card-body mb-0 pb-0">
                     <h1 className="text-center md:text-4xl font-bold text-2xl">Log in</h1>
                     <div className="form-control">
@@ -120,7 +121,7 @@ const Login = () => {
                         </div>
                     </div>
                     <div className="form-control mt-2">
-                        <button className="btn bg-green-500 text-white border-none hover:text-black">Login</button>
+                        <button disabled={!isValid} className="btn bg-green-500 text-white border-none hover:text-black">Login</button>
                     </div>
                     <p className="md:text-xs text-xs text-center">
                         Do not have any account? <Link to="/register" className="font-bold hover:underline text-sky-600">Register</Link>

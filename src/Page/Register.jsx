@@ -1,16 +1,21 @@
 
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import "./style.css"
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { AuthContext } from "../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passValidMsg, setPassValidMsg] = useState("Password need to include length 8, Special Character, Capital Letter, Number!");
     const [isValid, setIsValid] = useState(false);
     const verifyRef = useRef();
+
+    const {createUser} = useContext(AuthContext);
 
     const handleValidPassword = (e) => {
         setIsValid(false);
@@ -68,10 +73,36 @@ const Register = () => {
         }
     }
 
+    const handleRegister = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const name = form.name.value;
+        const photoUrl = form.photoUrl.value;
+        const email = form.email.value;
+        const password = form.password.value;
+        
+
+        const toastId = toast.loading("Creating User...");
+
+        createUser(email, password)
+        .then(res => {
+            console.log(res);
+            updateProfile(res.user, {
+                displayName: name, 
+                photoURL: photoUrl
+            }).then(() => {
+                toast.success("User Created Successfully!!", { id: toastId })
+            }).catch(err => toast.error(err.message, {id: toastId}))
+        }).catch(err => {
+            toast.error(err.message, {id: toastId})
+        })
+    }
+
     return (
-        <div className="login-container flex justify-center items-center px-3 py-5">
+        <div className="login-container min-h-screen flex justify-center items-center px-3 py-5">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
-                <form className="card-body mb-0 pb-0">
+            <Link to="/" className="px-3 py-1 text-red-500 font-semibold hover:underline">Go To Home</Link>
+                <form onSubmit={handleRegister} className="card-body mb-0 pb-0">
                     <h1 className="text-center md:text-4xl font-bold text-2xl">Register</h1>
                     <div className="form-control">
                         <label className="label">
@@ -128,7 +159,7 @@ const Register = () => {
                         </div>
                     </div>
                     <div className="form-control mt-2">
-                        <button className="btn bg-green-500 text-white border-none hover:text-black">Login</button>
+                        <button disabled={!isValid} className="btn bg-green-500 text-white border-none hover:text-black">Register</button>
                     </div>
                     <p className="md:text-xs text-xs text-center">
                         Already have an account? <Link to="/login" className="font-bold hover:underline text-sky-600">Login</Link>

@@ -14,7 +14,7 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 const Banner = () => {
     return (
         <>
-            <div className="h-[calc(100vh-82px)] overflow-y-hidden relative flex justify-center items-center">
+            <div className="min-h-[calc(100vh-82px)] overflow-y-hidden relative flex justify-center items-center">
                 <video src={bannerVideo} width="100%" className="absolute z-0" height="100%" autoPlay loop muted>
                 </video>
                 <span className="overlay text-white"></span>
