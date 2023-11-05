@@ -1,16 +1,19 @@
 
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import "./style.css"
 import { Link } from "react-router-dom";
 import { FcGoogle } from 'react-icons/fc';
 import { BsGithub } from 'react-icons/bs';
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { AuthContext } from "../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [passValidMsg, setPassValidMsg] = useState("Password need to include length 8, Special Character, Capital Letter, Number!");
     const [isValid, setIsValid] = useState(false);
     const verifyRef = useRef();
+    const {loginWithEmailAndPassword} = useContext(AuthContext);
 
     const handleValidPassword = (e) => {
         setIsValid(false);
@@ -24,7 +27,7 @@ const Login = () => {
         const password = e.target.value;
         const verifyElements = verifyRef.current.childNodes;
 
-        if (password.length > 8) {
+        if (password.length >= 8) {
             verifyElements[0].classList.remove("hidden");
             validWords[0] = "";
             count++;
@@ -68,17 +71,33 @@ const Login = () => {
         }
     }
 
+    const handleLogin = (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        const toastId = toast.loading("Creating User...");
+
+        loginWithEmailAndPassword(email, password)
+        .then(() => {
+            toast.success("User Logged in Successfully!!", { id: toastId })
+        }).catch(err => {
+            toast.error(err.message, {id: toastId})
+        })
+    }
+
     return (
         <div className="login-container min-h-screen flex justify-center items-center px-3 py-5">
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
             <Link to="/" className="px-3 py-1 text-red-500 font-semibold hover:underline">Go To Home</Link>
-                <form className="card-body mb-0 pb-0">
+                <form onSubmit={handleLogin} className="card-body mb-0 pb-0">
                     <h1 className="text-center md:text-4xl font-bold text-2xl">Log in</h1>
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text">Email</span>
                         </label>
-                        <input type="email" placeholder="email" className="input input-bordered" required />
+                        <input type="email" name="email" placeholder="email" className="input input-bordered" required />
                     </div>
                     <div className="form-control mt-3">
 

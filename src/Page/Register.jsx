@@ -30,7 +30,7 @@ const Register = () => {
         const password = e.target.value;
         const verifyElements = verifyRef.current.childNodes;
 
-        if (password.length > 8) {
+        if (password.length >= 8) {
             verifyElements[0].classList.remove("hidden");
             validWords[0] = "";
             count++;
@@ -87,7 +87,6 @@ const Register = () => {
 
         createUser(email, password)
         .then(res => {
-            console.log(res);
             updateProfile(res.user, {
                 displayName: name, 
                 photoURL: photoUrl
