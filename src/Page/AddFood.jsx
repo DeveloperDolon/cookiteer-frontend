@@ -2,11 +2,12 @@ import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { axiosSecure } from "../hooks/useExiosSecure";
 import toast from "react-hot-toast";
+import moment from "moment/moment";
 
 
 const AddFood = () => {
 
-    const {user} = useContext(AuthContext);
+    const {user, defaultImage} = useContext(AuthContext);
 
     const handleAddProduct = (e) => {
         const addProductId = toast.loading("Product adding...");
@@ -16,14 +17,17 @@ const AddFood = () => {
         const foodName = form.foodName.value;
         const foodImage = form.foodImage.value;
         const foodQuantity = form.foodQuantity.value;
-        const expiredDate = form.expiredDate.value;
+        const date = form.expiredDate.value;
         const pickUpLocation = form.pickUpLocation.value;
         const category = form.category.value;
         const additionalNotes = form.additionalNotes.value;
         const donarName = user.displayName;
         const donarEmail = user.email;
+        const donarPhoto = user?.photoURL ? user?.photoURL : defaultImage;
+        const expiredDate = moment(date).format("lll");
 
-        const foodInfo = {foodName, foodImage, foodQuantity, expiredDate, pickUpLocation, category, additionalNotes, donarName, donarEmail};
+        const foodInfo = {foodName, foodImage, foodQuantity, expiredDate, pickUpLocation, category, additionalNotes, donarName, donarEmail, donarPhoto};
+
 
         axiosSecure.post("/api/v1/add-food", {...foodInfo})
         .then(res => {

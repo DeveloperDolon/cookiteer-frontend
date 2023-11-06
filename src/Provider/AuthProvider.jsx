@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({children}) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+    const defaultImage = "https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
     const auth = getAuth(app);
     const mainUrl = "http://localhost:5000";
 
@@ -53,7 +54,8 @@ const AuthProvider = ({children}) => {
         user,
         loginWithEmailAndPassword,
         logOut,
-        mainUrl
+        mainUrl,
+        defaultImage
     }
 
     return (
