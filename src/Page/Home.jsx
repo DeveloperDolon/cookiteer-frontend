@@ -37,7 +37,7 @@ const Home = () => {
                         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deleniti corrupti accusantium quae error id fugiat nulla architecto alias. Sapiente sequi ab doloremque eligendi officiis, obcaecati unde aliquam mollitia explicabo cumque.
                     </p>
 
-                    <div className="grid md:grid-cols-2 grid-cols-1 gap-8 md:mt-16 mt-10">
+                    <div className="grid lg:grid-cols-2 grid-cols-1 gap-8 md:mt-16 mt-10">
                         {
                             foods?.map(food => <FoodItem key={food._id} food={food}></FoodItem>)
                         }

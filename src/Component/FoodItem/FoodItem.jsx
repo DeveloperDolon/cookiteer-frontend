@@ -9,7 +9,7 @@ const FoodItem = ({food}) => {
     const { defaultImage } = useContext(AuthContext);
 
     return (
-        <div className="grid grid-cols-2 bg-white overflow-hidden shadow-xl rounded-xl" key={food._id}>
+        <div className="grid sm:grid-cols-2 grid-cols-1 bg-white overflow-hidden shadow-xl rounded-xl" key={food._id}>
             <div className="overflow-hidden relative">
                 <img className="relative h-full w-full object-cover duration-500 hover:scale-110 hover:rotate-2" src={food.foodImage} alt="" />
             </div>
@@ -26,7 +26,7 @@ const FoodItem = ({food}) => {
                     {food.additionalNotes.length > 50 ? food.additionalNotes.slice(0, 50) + "..." : food.additionalNotes}
                 </p>
 
-                <p className="md:text-sm text-xs font-medium">Quantity : {food.foodQuantity} (no. of person to be served)</p>
+                <p className="md:text-sm text-xs font-medium my-2">Quantity : {food.foodQuantity} (no. of person to be served)</p>
 
                 <div className="flex justify-between flex-wrap gap-3 my-2">
                     <span className="flex gap-1 items-center">
@@ -41,7 +41,7 @@ const FoodItem = ({food}) => {
                 </div>
 
                 <div>
-                    <button className="bg-[#fafafa] md:px-5 px-3 md:py-3 py-2 rounded-lg shadow-md font-bold md:text-sm text-xs duration-300 hover:bg-slate-500 hover:text-lime-400 text-lime-600">View Details</button>
+                    <button className="bg-[#fafafa] mt-1 md:px-5 px-3 md:py-3 py-2 rounded-lg shadow-md font-bold md:text-sm text-xs duration-300 hover:bg-slate-500 hover:text-lime-400 text-lime-600">View Details</button>
                 </div>
             </div>
         </div>
