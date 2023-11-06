@@ -12,7 +12,6 @@ const Home = () => {
     useEffect(() => {
         axiosSecure.get("/api/v1/foods?sortItem=foodQuantity&sort=dsc")
             .then(res => {
-                console.log(res.data.length > 6);
                 if(res.data.length > 6) {
                     const foodsArr = res.data.slice(0, 6);
                     setFoods(foodsArr);
