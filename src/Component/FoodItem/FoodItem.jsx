@@ -3,10 +3,12 @@ import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { BiSolidTime } from 'react-icons/bi';
 import { FaLocationDot } from 'react-icons/fa6'
+import { useNavigate } from "react-router-dom";
 
 const FoodItem = ({food}) => {
 
     const { defaultImage } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     return (
         <div className="grid sm:grid-cols-2 grid-cols-1 bg-white overflow-hidden shadow-xl rounded-xl" key={food._id}>
@@ -41,7 +43,7 @@ const FoodItem = ({food}) => {
                 </div>
 
                 <div>
-                    <button className="bg-[#fafafa] mt-1 md:px-5 px-3 md:py-3 py-2 rounded-lg shadow-md font-bold md:text-sm text-xs duration-300 hover:bg-slate-500 hover:text-lime-400 text-lime-600">View Details</button>
+                    <button onClick={() => navigate(`/food/${food._id}`)} className="bg-[#fafafa] mt-1 md:px-5 px-3 md:py-3 py-2 rounded-lg shadow-md font-bold md:text-sm text-xs duration-300 hover:bg-slate-500 hover:text-lime-400 text-lime-600">View Details</button>
                 </div>
             </div>
         </div>

@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { axiosSecure } from "../hooks/useExiosSecure";
 import FoodItem from "../Component/FoodItem/FoodItem";
 
-
 const AvailableFoods = () => {
     const [category, setCategory] = useState("");
     const [sortItem, setSortItem] = useState("");
