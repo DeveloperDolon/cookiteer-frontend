@@ -40,7 +40,7 @@ const MainLayout = () => {
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
             }
-            to="/available-food">Available Food<span></span></NavLink></li>
+            to="/available-foods">Available Food<span></span></NavLink></li>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
@@ -63,7 +63,7 @@ const MainLayout = () => {
 
             <div className="drawer">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
-                <div className="drawer-content flex flex-col overflow-y-auto">
+                <div className="drawer-content flex flex-col">
                     {/* Navbar */}
                     <div className="">
                         <div className="w-full navbar max-w-7xl mx-auto justify-between">
