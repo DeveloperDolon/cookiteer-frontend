@@ -9,10 +9,21 @@ import { FaLocationDot } from 'react-icons/fa6';
 const Home = () => {
     const [foods, setFoods] = useState([]);
     const { defaultImage } = useContext(AuthContext);
+    const [seeMoreFoods, setSeeMoreFoods] = useState(false);
 
     useEffect(() => {
-        axiosSecure.get("/api/v1/foods")
-            .then(res => setFoods(res.data))
+        axiosSecure.get("/api/v1/foods?sortItem=foodQuantity&sort=dsc")
+            .then(res => {
+                console.log(res.data.length > 6);
+                if(res.data.length > 6) {
+                    const foodsArr = res.data.slice(0, 6);
+                    setFoods(foodsArr);
+                    setSeeMoreFoods(true);
+                    return;
+                } 
+                setFoods(res.data);
+                setSeeMoreFoods(false);
+            })
             .catch(err => console.log(err.message))
     }, []);
 
@@ -33,8 +44,8 @@ const Home = () => {
                             foods?.map(food => {
 
                                 return <div className="grid grid-cols-2 bg-white overflow-hidden shadow-xl rounded-xl" key={food._id}>
-                                    <div>
-                                        <img className="h-full w-full object-cover" src={food.foodImage} alt="" />
+                                    <div className="overflow-hidden relative">
+                                        <img className="relative h-full w-full object-cover duration-500 hover:scale-110 hover:rotate-2" src={food.foodImage} alt="" />
                                     </div>
 
                                     <div className="py-3  px-8">
@@ -69,6 +80,12 @@ const Home = () => {
                                     </div>
                                 </div>
                             })
+                        }
+                    </div>
+
+                    <div>
+                        {
+                            seeMoreFoods ? <button className="block mx-auto mt-16 btn bg-white drop-shadow-xl">Show All</button> : ""
                         }
                     </div>
                 </div>

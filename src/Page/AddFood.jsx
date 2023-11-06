@@ -16,7 +16,7 @@ const AddFood = () => {
         const form = e.target;
         const foodName = form.foodName.value;
         const foodImage = form.foodImage.value;
-        const foodQuantity = form.foodQuantity.value;
+        const foodQuantity = parseInt(form.foodQuantity.value);
         const date = form.expiredDate.value;
         const pickUpLocation = form.pickUpLocation.value;
         const category = form.category.value;
@@ -25,6 +25,7 @@ const AddFood = () => {
         const donarEmail = user.email;
         const donarPhoto = user?.photoURL ? user?.photoURL : defaultImage;
         const expiredDate = moment(date).format("lll");
+
 
         const foodInfo = {foodName, foodImage, foodQuantity, expiredDate, pickUpLocation, category, additionalNotes, donarName, donarEmail, donarPhoto};
 
