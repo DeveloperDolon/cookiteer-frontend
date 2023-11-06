@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { CiLogout } from 'react-icons/ci';
 import toast from "react-hot-toast";
 import axios from "axios";
+import Footer from "../Component/Footer/Footer";
 
 const MainLayout = () => {
 
@@ -111,6 +112,7 @@ const MainLayout = () => {
                 </div>
             </div>
 
+            <Footer></Footer>
 
         </div>
     );
