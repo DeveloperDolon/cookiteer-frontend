@@ -93,8 +93,8 @@ const ManageFood = () => {
 
                 <div className="space-y-10 mt-12">
 
-                    <div className="overflow-x-auto">
-                        <table className="table">
+                    <div className="overflow-x-hidden relative">
+                        <table className="table relative">
                             {/* head */}
                             <thead>
                                 <tr>

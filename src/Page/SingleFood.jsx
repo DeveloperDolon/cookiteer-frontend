@@ -10,7 +10,7 @@ const SingleFood = () => {
     const foodData = useLoaderData();
 
     const handleRequestFood = () => {
-        
+        alert(foodData._id);
     }
 
     return (
@@ -57,10 +57,10 @@ const SingleFood = () => {
                                             <p className="font-medium md:text-sm text-xs pt-1">Donar Email : {foodData?.donarEmail}</p>
                                             <p className="font-medium md:text-sm text-xs pt-1">Donar Name : {foodData?.donarName}</p>
                                             <p className="font-medium md:text-sm text-xs pt-1">User Email : {user?.email}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Request Date : <input type="text" value={moment(new Date()).format("lll")} name="" id="" /></p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Request Date : <input type="text" readOnly value={moment(new Date()).format("lll")} name="" id="" /></p>
                                             <p className="font-medium md:text-sm text-xs pt-1">Pickup Location : {foodData?.pickUpLocation}</p>
                                             <p className="font-medium md:text-sm text-xs pt-1">Expired Date : {foodData?.expiredDate}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Expired Date : <input type="number" className="border-2 border-black rounded-lg p-1 placeholder:text-xs" placeholder="Donate Money" min="1" name="money" id="" /></p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Donate Money : $<input type="number" defaultValue="5"  className="border-2 ml-1 border-black rounded-lg p-1 placeholder:text-xs" placeholder="Donate Money" min="1" name="money" id="" /></p>
                                             <p className="font-medium md:text-sm text-xs pt-1">Additional Notes : 
                                                 <textarea name="notes" id="" className="w-full border-2 px-3 py-4 border-black rounded-lg" cols="20" rows="5" ></textarea>
                                             </p>
@@ -68,7 +68,7 @@ const SingleFood = () => {
                                         <div className="modal-action">
                                             <form method="dialog" className="space-x-5">
                                                 {/* if there is a button in form, it will close the modal */}
-                                                <button className="btn bg-lime-500 text-white">Request</button>
+                                                <button onClick={handleRequestFood} className="btn bg-lime-500 text-white">Request</button>
                                                 <button className="btn">Close</button>
                                             </form>
                                         </div>

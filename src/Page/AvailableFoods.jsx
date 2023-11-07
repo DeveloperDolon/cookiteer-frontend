@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 const AvailableFoods = () => {
     const [category, setCategory] = useState("");
     const [sortItem, setSortItem] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
     const [foods, setFoods] = useState([]);
     const [sort, setSort] = useState("");
     const [isLoading, setIsLoading] = useState(true);
@@ -22,19 +23,24 @@ const AvailableFoods = () => {
     };
 
     useEffect(() => {
+        console.log("hello world!");
         setIsLoading(true);
-        axiosSecure.get(`/api/v1/foods?sortItem=${sortItem}&sort=${sort}&category=${category}`)
+        axiosSecure.get(`/api/v1/foods?sortItem=${sortItem}&sort=${sort}&category=${category}&search=${searchQuery}`)
             .then(res => {
                 setFoods(res.data);
                 setIsLoading(false);
             })
             .catch(err => console.log(err))
-    }, [category, sortItem, sort]);
+    }, [ searchQuery, category, sortItem, sort]);
 
     return (
         <div className="bg-[#fafafa]">
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 md:mb-32 mb-20">
-                <div className="py-10 flex justify-between flex-wrap items-center md:space-y-0 space-y-7">
+                <div className="pt-10 pb-5 relative flex">
+                        <input onChange={(e) => setSearchQuery(e.target.value)} type="text" name="search" className="w-full md:py-5 py-3 md:text-base text-sm md:px-6 px-3 rounded-l-lg shadow-lg" placeholder="Search Food..." />
+                        <button type="submit" className="md:py-5 py-3 md:px-10 px-6 md:text-lg text-base font-semibold rounded-r-lg text-white bg-lime-500 shadow-lg">Search</button>
+                </div>
+                <div className="py-10 pt-6 flex justify-between flex-wrap items-center md:space-y-0 space-y-7">
                     <h1 className="md:text-5xl text-3xl font-bold md:w-fit w-full">All Available Foods
                         <span className="block border-4 border-lime-500 mt-2 w-[70%]"></span>
                     </h1>
