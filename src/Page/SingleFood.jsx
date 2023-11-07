@@ -13,8 +13,14 @@ const SingleFood = () => {
 
     const handleRequestFood = (e) => {
         e.preventDefault();
-        const foodRequestLoading = toast.loading("Food Requesting...");
         document.getElementById("close-btn").click();
+
+        if(user?.email === foodData?.donarEmail) {
+            toast.error("You can't request your foods😬😬!");
+            return;
+        }
+
+        const foodRequestLoading = toast.loading("Food Requesting...");
 
         const foodName = foodData?.foodName;
         const foodImage = foodData?.foodImage;
@@ -22,14 +28,16 @@ const SingleFood = () => {
         const expiredDate = foodData?.expiredDate;
         const donarEmail = foodData?.donarEmail;
         const donarName = foodData?.donarName;
-        const requesterEmail = user?.email;
         const pickUpLocation = foodData?.pickUpLocation;
         const requestDate = e.target.requestDate.value;
         const donateMoney = e.target.donateMoney.value;
         const additionalNotes = e.target.additionalNotes.value;
         const requesterName = user?.displayName;
+        const requesterEmail = user?.email;
+        const requesterImage = user?.photoURL;
+        const status = "Available";
 
-        const foodRequestData = { foodName, foodImage, foodId, expiredDate, donarEmail, donarName, requesterName, requesterEmail, pickUpLocation, requestDate, donateMoney, additionalNotes };
+        const foodRequestData = { foodName, foodImage, foodId, expiredDate, donarEmail, donarName, requesterName, requesterEmail, pickUpLocation, requestDate, donateMoney, additionalNotes, requesterImage, status };
 
         axiosSecure.post("/api/v1/food-requests", {...foodRequestData})
         .then(res => {

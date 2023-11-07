@@ -23,7 +23,6 @@ const AvailableFoods = () => {
     };
 
     useEffect(() => {
-        console.log("hello world!");
         setIsLoading(true);
         axiosSecure.get(`/api/v1/foods?sortItem=${sortItem}&sort=${sort}&category=${category}&search=${searchQuery}`)
             .then(res => {
