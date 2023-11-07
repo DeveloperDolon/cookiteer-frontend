@@ -55,7 +55,8 @@ const AuthProvider = ({children}) => {
         loginWithEmailAndPassword,
         logOut,
         mainUrl,
-        defaultImage
+        defaultImage,
+        setLoading
     }
 
     return (

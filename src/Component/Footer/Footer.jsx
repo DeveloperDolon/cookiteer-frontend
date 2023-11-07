@@ -5,7 +5,7 @@ const Footer = () => {
         <div
             className="py-24 bg-white"
         >
-            <footer className="footer p-10 text-base-content bg-white">
+            <footer className="footer lg:p-0 p-10 text-base-content bg-white max-w-7xl mx-auto ">
                 <aside>
                     <img className="w-52" src="https://androthemes.com/themes/angular/cookiteer/assets/img/logo.png" alt="" />
                     <p>Cookiteer Organization<br />Providing reliable tech since 2012</p>
