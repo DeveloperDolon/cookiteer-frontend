@@ -4,13 +4,48 @@ import { FaLocationDot } from "react-icons/fa6";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import moment from "moment";
+import toast from "react-hot-toast";
+import { axiosSecure } from "../hooks/useExiosSecure";
 
 const SingleFood = () => {
     const { defaultImage, user} = useContext(AuthContext);
     const foodData = useLoaderData();
 
-    const handleRequestFood = () => {
-        alert(foodData._id);
+    const handleRequestFood = (e) => {
+        e.preventDefault();
+        const foodRequestLoading = toast.loading("Food Requesting...");
+        document.getElementById("close-btn").click();
+
+        const foodName = foodData?.foodName;
+        const foodImage = foodData?.foodImage;
+        const foodId = foodData?._id;
+        const expiredDate = foodData?.expiredDate;
+        const donarEmail = foodData?.donarEmail;
+        const donarName = foodData?.donarName;
+        const requesterEmail = user?.email;
+        const pickUpLocation = foodData?.pickUpLocation;
+        const requestDate = e.target.requestDate.value;
+        const donateMoney = e.target.donateMoney.value;
+        const additionalNotes = e.target.additionalNotes.value;
+        const requesterName = user?.displayName;
+
+        const foodRequestData = { foodName, foodImage, foodId, expiredDate, donarEmail, donarName, requesterName, requesterEmail, pickUpLocation, requestDate, donateMoney, additionalNotes };
+
+        axiosSecure.post("/api/v1/food-requests", {...foodRequestData})
+        .then(res => {
+            if(res.data.insertedId) {
+                toast.success("Request Completed!!", {id : foodRequestLoading});
+            }
+        })
+        .catch(err => {
+            if(err.response.status === 409) {
+                toast.error("Already Requested!", {id: foodRequestLoading})
+            } else {
+                toast.error(err.message, {id: foodRequestLoading})
+            }
+            
+        });
+
     }
 
     return (
@@ -51,25 +86,59 @@ const SingleFood = () => {
                                             <div className="mb-6">
                                                 <img className=" rounded-xl" src={foodData?.foodImage} alt="" />
                                             </div>
-                                            <p className="font-bold md:text-xl text-lg pt-1">Food Name : {foodData?.foodName}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Food Quantity : {foodData?.foodQuantity} (no. of person to be served.)</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Food Id : {foodData?._id}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Donar Email : {foodData?.donarEmail}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Donar Name : {foodData?.donarName}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">User Email : {user?.email}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Request Date : <input type="text" readOnly value={moment(new Date()).format("lll")} name="" id="" /></p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Pickup Location : {foodData?.pickUpLocation}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Expired Date : {foodData?.expiredDate}</p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Donate Money : $<input type="number" defaultValue="5"  className="border-2 ml-1 border-black rounded-lg p-1 placeholder:text-xs" placeholder="Donate Money" min="1" name="money" id="" /></p>
-                                            <p className="font-medium md:text-sm text-xs pt-1">Additional Notes : 
-                                                <textarea name="notes" id="" className="w-full border-2 px-3 py-4 border-black rounded-lg" cols="20" rows="5" ></textarea>
-                                            </p>
+                                            <form onSubmit={handleRequestFood} className="grid grid-cols-1 gap-5">
+                                                <label className="font-bold md:text-xl text-lg pt-1">Food Name : 
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="foodName" value={foodData?.foodName} readOnly id="" />
+                                                </label>
+
+                                                <label className="font-medium md:text-sm text-xs pt-1">Food Quantity : (no. of person to be served.)
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="foodQuantity" value={foodData?.foodQuantity} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Food Id :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="foodId" value={foodData?._id} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Donar Email :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="donarEmail" value={foodData?.donarEmail} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Donar Name :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="donarName" value={foodData?.donarName} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">User Email :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="userEmail" value={user?.email} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Request Date :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="requestDate" value={moment(new Date()).format("lll")} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Pickup Location : 
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="pickUpLocation" value={foodData?.pickUpLocation} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Expired Date :
+                                                    <input type="text" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" name="expiredDate" value={foodData?.expiredDate} readOnly id="" />
+                                                </label>
+                                                
+                                                <label className="font-medium md:text-sm text-xs pt-1">Donate Money : $
+                                                    <input type="number" min="1" className="w-full mt-2 py-2 px-3 bg-gray-100 rounded-lg" defaultValue={5} name="donateMoney" id="" />
+                                                </label>
+
+                                                <label className="font-medium md:text-sm text-xs pt-1">Additional Notes : 
+                                                    <textarea name="additionalNotes" id="" className="w-full border-2 px-3 py-4 border-black rounded-lg" cols="20" rows="5" ></textarea>
+                                                </label>
+                                                <div>
+                                                    <button type="submit" className="btn bg-lime-500 text-white">Request</button>
+                                                </div>
+                                            </form>
                                         </div>
                                         <div className="modal-action">
                                             <form method="dialog" className="space-x-5">
                                                 {/* if there is a button in form, it will close the modal */}
-                                                <button onClick={handleRequestFood} className="btn bg-lime-500 text-white">Request</button>
-                                                <button className="btn">Close</button>
+                                                <button id="close-btn" className="btn bg-red-500 text-white">Close</button>
                                             </form>
                                         </div>
                                     </div>
