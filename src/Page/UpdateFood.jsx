@@ -7,9 +7,9 @@ import { axiosSecure } from "../hooks/useExiosSecure";
 const UpdateFood = () => {
 
     const foodData = useLoaderData();
+    var date = moment(foodData.expiredDate).format('YYYY-MM-DD HH:mm');
 
-
-    const handleUpdateFood = (e) => {
+    const handleUpdateFood = (e) => {   
         const addProductId = toast.loading("Product adding...");
         e.preventDefault();
 
@@ -28,7 +28,7 @@ const UpdateFood = () => {
         axiosSecure.patch(`/api/v1/update-food/${foodData._id}`, {...foodInfo})
         .then(res => {
             console.log(res);
-            if(res.data.insertedId) {
+            if(res.data.modifiedCount > 0) {
                 toast.success("Product added successfully!!", { id: addProductId });
             }
         }).catch(err => {
@@ -70,7 +70,7 @@ const UpdateFood = () => {
                             </label>
 
                             <label htmlFor="expiredDate"> Expired Date/Time
-                                <input type="datetime-local" defaultValue={foodData?.expiredDate} name="expiredDate" className="w-full md:py-5 py-2 md:text-base border text-sm mt-3 rounded-lg px-5" placeholder="Expired Date" required />
+                                <input type="datetime-local" defaultValue={date} name="expiredDate" className="w-full md:py-5 py-2 md:text-base border text-sm mt-3 rounded-lg px-5" placeholder="Expired Date" required />
                             </label>
 
                             <label htmlFor="pickUpLocation"> Pickup Location

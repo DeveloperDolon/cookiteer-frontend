@@ -48,7 +48,11 @@ const ManageFood = () => {
                     <span className="overlayz"></span>
                 </div>
 
-                <div className="space-y-10 mt-20">
+                <div>
+                    <h2 className="md:text-3xl text-xl font-bold mt-10">Your total food count : {myFoods.length}</h2>
+                </div>
+
+                <div className="space-y-10 mt-12">
 
                     <div className="overflow-x-auto">
                         <table className="table">
