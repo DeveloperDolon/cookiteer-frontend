@@ -133,7 +133,7 @@ const ManageFood = () => {
                                                 </div>
                                             </td>
                                             <th>
-                                                <button className="btn btn-ghost btn-xs border border-lime-500">Manage</button>
+                                                <Link to={`/manage-food-request/${food._id}`} className="btn btn-ghost btn-xs border border-lime-500">Manage</Link>
                                             </th>
                                         </tr>
                                     </>)
