@@ -1,4 +1,4 @@
-import { Link, NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet, useNavigate } from "react-router-dom";
 import "./style.css"
 import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
@@ -11,6 +11,7 @@ const MainLayout = () => {
 
     const { mainUrl, user, logOut, setUser} = useContext(AuthContext);
     const [showDropdown, setShowDropdown] = useState(false);
+    const navigate = useNavigate();
 
     const handleClick = (e) => {
         if(e.target.id !== "user-img") {
@@ -23,7 +24,10 @@ const MainLayout = () => {
         .then(() => {
 
             axios.post(`${mainUrl}/api/v1/logout`,{user: user?.email}, {withCredentials: true})
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                navigate("/");
+            })
             .catch(err => console.log(err.message))
 
             toast.success("Logged out successfully!!")

@@ -10,16 +10,17 @@ export const axiosSecure = axios.create({
     withCredentials: true,
 });
 
-const useAxiosSecure = (url) => {
+const useAxiosSecure = () => {
     const {logOut} = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
-        axiosSecure.get(url).interceptors.response.use(res => {
+        axiosSecure.interceptors.request.use(res => {
             return res;
         }, error => {
-            console.log("Error tracked in the interceptor", error.response);
-            if(error.response.status === 401 || error.response.status === 403) {
+            console.log(error);
+            console.log("Error tracked in the interceptor", error?.response);
+            if(error?.response?.status === 401 || error?.response?.status === 403) {
                 console.log("logout the user!");
                 logOut()
                 .then(() => {

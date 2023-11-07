@@ -7,6 +7,7 @@ import AddFood from "../Page/AddFood";
 import AvailableFoods from "../Page/AvailableFoods";
 import SingleFood from "../Page/SingleFood";
 import PrivateRoute from "./PrivateRoute";
+import ManageFood from "../Page/ManageFood";
 
 const MainRouter = createBrowserRouter([
     {
@@ -19,7 +20,7 @@ const MainRouter = createBrowserRouter([
             },
             {
                 path: "/add-food",
-                element: <AddFood></AddFood>
+                element: <PrivateRoute><AddFood></AddFood></PrivateRoute>
             }, 
             {
                 path: "/available-foods",
@@ -29,6 +30,10 @@ const MainRouter = createBrowserRouter([
                 path: "/food/:id",
                 loader: ({params}) => fetch(`http://localhost:5000/api/v1/foods/${params.id}`),
                 element: <PrivateRoute><SingleFood></SingleFood></PrivateRoute>
+            },
+            {
+                path: "/manage-food",
+                element: <PrivateRoute><ManageFood></ManageFood></PrivateRoute>
             }
         ]
     }, 
