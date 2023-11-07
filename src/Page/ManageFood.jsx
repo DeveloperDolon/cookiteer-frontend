@@ -127,7 +127,7 @@ const ManageFood = () => {
                                                 <span className="md:text-sm text-xs font-medium bg-lime-500 p-1 rounded-lg text-white">{food?.expiredDate}</span>
                                             </td>
                                             <td>
-                                                <div  className="flex h-full justify-center gap-4">
+                                                <div  className="flex h-full gap-4">
                                                     <Link to={`/update-food/${food._id}`} className="btn btn-xs bg-lime-500 text-white rounded-lg">Update</Link>
                                                     <button onClick={() => handleDelete(food?._id)} className="btn btn-xs bg-red-500 text-white rounded-lg">Delate</button>
                                                 </div>

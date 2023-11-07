@@ -3,10 +3,15 @@ import { BiSolidTime } from 'react-icons/bi';
 import { FaLocationDot } from "react-icons/fa6";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import moment from "moment";
 
 const SingleFood = () => {
-    const { defaultImage } = useContext(AuthContext);
+    const { defaultImage, user} = useContext(AuthContext);
     const foodData = useLoaderData();
+
+    const handleRequestFood = () => {
+        
+    }
 
     return (
         <div className="bg-[#fafafa] md:pb-32 pb-20">
@@ -38,7 +43,37 @@ const SingleFood = () => {
                                 {foodData?.additionalNotes}
                             </div>
                             <div>
-                                <button className="btn bg-green-500 text-white hover:text-gray-500">Request For Food</button>
+                                <button onClick={() => document.getElementById('my_modal_5').showModal()} className="btn bg-green-500 text-white hover:text-gray-500">Request For Food</button>
+                                {/* Open the modal using document.getElementById('ID').showModal() method */}
+                                <dialog id={`my_modal_5`} className="modal modal-bottom sm:modal-middle">
+                                    <div className="modal-box">
+                                        <div>
+                                            <div className="mb-6">
+                                                <img className=" rounded-xl" src={foodData?.foodImage} alt="" />
+                                            </div>
+                                            <p className="font-bold md:text-xl text-lg pt-1">Food Name : {foodData?.foodName}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Food Quantity : {foodData?.foodQuantity} (no. of person to be served.)</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Food Id : {foodData?._id}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Donar Email : {foodData?.donarEmail}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Donar Name : {foodData?.donarName}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">User Email : {user?.email}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Request Date : <input type="text" value={moment(new Date()).format("lll")} name="" id="" /></p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Pickup Location : {foodData?.pickUpLocation}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Expired Date : {foodData?.expiredDate}</p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Expired Date : <input type="number" className="border-2 border-black rounded-lg p-1 placeholder:text-xs" placeholder="Donate Money" min="1" name="money" id="" /></p>
+                                            <p className="font-medium md:text-sm text-xs pt-1">Additional Notes : 
+                                                <textarea name="notes" id="" className="w-full border-2 px-3 py-4 border-black rounded-lg" cols="20" rows="5" ></textarea>
+                                            </p>
+                                        </div>
+                                        <div className="modal-action">
+                                            <form method="dialog" className="space-x-5">
+                                                {/* if there is a button in form, it will close the modal */}
+                                                <button className="btn bg-lime-500 text-white">Request</button>
+                                                <button className="btn">Close</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </dialog>
                             </div>
                         </div>
                     </div>
