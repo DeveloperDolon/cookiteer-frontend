@@ -32,14 +32,13 @@ const AuthProvider = ({children}) => {
         const unSubscribe = onAuthStateChanged(auth, currentUser => {
             if(currentUser) {
                 setUser(currentUser);
-
+                
                 axios.post(`${mainUrl}/api/v1/jwt`, {user: currentUser?.email}, 
                 {withCredentials: true}
                 ).then(res => console.log(res.data))
                 .catch(err => console.log(err))
-
-                setLoading(false);
             }
+            setLoading(false);
         });
 
         return () => {

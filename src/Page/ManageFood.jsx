@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import bgImage from "../assets/images/hand-giving-food-bowl-needy-person.jpg"
 import "./style.css";
+import Swal from "sweetalert2";
 
 const ManageFood = () => {
     const { user, logOut, setUser, setLoading } = useContext(AuthContext);
@@ -29,6 +30,44 @@ const ManageFood = () => {
                 }
             })
     }, [axiosSecure, user.email]);
+
+
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+                
+                axiosSecure.delete(`/api/v1/foods/${id}`)
+                .then(res => {
+                    
+                    const filterFoods = myFoods.filter(food => food._id !== id);
+                    setMyFoods(filterFoods);
+
+                    if(res.data.deletedCount > 0) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your file has been deleted.",
+                            icon: "success"
+                          });
+                    }
+                }).catch(err => {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: err.message,
+                        footer: '<a href="#">Why do I have this issue?</a>'
+                      });
+                })
+            }
+          });
+    }
 
 
     return (
@@ -90,7 +129,7 @@ const ManageFood = () => {
                                             <td>
                                                 <div  className="flex h-full justify-center gap-4">
                                                     <Link to={`/update-food/${food._id}`} className="btn btn-xs bg-lime-500 text-white rounded-lg">Update</Link>
-                                                    <button className="btn btn-xs bg-red-500 text-white rounded-lg">Delate</button>
+                                                    <button onClick={() => handleDelete(food?._id)} className="btn btn-xs bg-red-500 text-white rounded-lg">Delate</button>
                                                 </div>
                                             </td>
                                             <th>

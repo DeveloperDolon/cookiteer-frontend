@@ -9,7 +9,7 @@ import Footer from "../Component/Footer/Footer";
 
 const MainLayout = () => {
 
-    const { mainUrl, user, logOut, setUser} = useContext(AuthContext);
+    const { mainUrl, user, logOut, setUser, setLoading} = useContext(AuthContext);
     const [showDropdown, setShowDropdown] = useState(false);
     const navigate = useNavigate();
 
@@ -26,6 +26,7 @@ const MainLayout = () => {
             axios.post(`${mainUrl}/api/v1/logout`,{user: user?.email}, {withCredentials: true})
             .then(res => {
                 console.log(res);
+                setLoading(false);
                 navigate("/");
             })
             .catch(err => console.log(err.message))
