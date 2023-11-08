@@ -3,12 +3,23 @@ import { axiosSecure } from "../hooks/useExiosSecure";
 import { AuthContext } from "../Provider/AuthProvider";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Lottie from "lottie-react";
+import animationData from "../../public/Animation - 1699287520981.json";
 
 
 const FoodRequest = () => {
     const { user, logOut, setUser, setLoading } = useContext(AuthContext);
     const [requestFoodData, setRequestData] = useState([]);
     const navigate = useNavigate();
+
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
 
     useEffect(() => {
         axiosSecure.get(`/api/v1/food-requests?email=${user?.email}`)
@@ -33,17 +44,17 @@ const FoodRequest = () => {
     const handleRemoveRequest = (id) => {
         const removeRequestId = toast.loading("Request canceling...")
         axiosSecure.delete(`/api/v1/food-requests/${id}`)
-        .then(res => {
-            if(res.data.deletedCount > 0) {
+            .then(res => {
+                if (res.data.deletedCount > 0) {
 
-                const newRequestData = requestFoodData.filter(food => food._id !== id);
-                setRequestData(newRequestData);
+                    const newRequestData = requestFoodData.filter(food => food._id !== id);
+                    setRequestData(newRequestData);
 
-                toast.success("Request cancelled!", {id: removeRequestId});
-            }
-        }).catch(err => {
-            toast.success(err.message, {id: removeRequestId});
-        })
+                    toast.success("Request cancelled!", { id: removeRequestId });
+                }
+            }).catch(err => {
+                toast.success(err.message, { id: removeRequestId });
+            })
     }
 
     return (
@@ -62,40 +73,54 @@ const FoodRequest = () => {
                     <span className="overlayz"></span>
                 </div>
 
-                <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mt-28">
-                    {
-                        requestFoodData?.map(food => <div className="grid md:grid-cols-2 grid-cols-1 shadow-lg rounded-xl overflow-hidden" key={food._id}>
-                            <div>
-                                <img className="w-full h-full object-cover" src={food?.foodImage} alt="" />
-                            </div>
-
-                            <div className="px-5 py-4">
-                                <h3 className="md:text-xl text-lg font-semibold">Food Name : {food.foodName}</h3>
-                                <p className="md:text-sm text-xs font-semibold my-2">Donar Name : {food?.donarName}</p>
-
-                                <p className="md:text-sm text-xs font-semibold">Pickup Location : {food?.pickUpLocation}</p>
-
-                                <p className="md:text-sm text-xs font-semibold my-2">Donation Amount : {food?.donateMoney} $</p>
-
-                                <p className="md:text-sm text-red-500 text-xs font-semibold">Expired Date : {food?.expiredDate}</p>
-
-                                <p className="md:text-sm  text-xs font-semibold my-2">Request Date : {food?.requestDate}</p>
-
-
-                                <div className="flex justify-between gap-3 flex-wrap items-center">
-                                    <p className={`md:text-sm w-fit px-2 text-white py-1 ${food?.status === "Available" ? "bg-amber-500" : "bg-green-500"} rounded-lg text-xs font-semibold`}> Status : {food?.status}</p>
-
-                                    {
-                                        food?.status === "Available" ? <button 
-                                        onClick={() => handleRemoveRequest(food._id)}
-                                        className="btn btn-sm capitalize bg-red-500 text-white hover:text-black">Cancel Request</button> : "" 
-                                    }
-                                    
+                {
+                    requestFoodData.length > 0 ? <div className="grid lg:grid-cols-2 grid-cols-1 gap-10 mt-28">
+                        {
+                            requestFoodData?.map(food => <div className="grid md:grid-cols-2 grid-cols-1 shadow-lg rounded-xl overflow-hidden" key={food._id}>
+                                <div>
+                                    <img className="w-full h-full object-cover" src={food?.foodImage} alt="" />
                                 </div>
-                            </div>
-                        </div>)
-                    }
-                </div>
+
+                                <div className="px-5 py-4">
+                                    <h3 className="md:text-xl text-lg font-semibold">Food Name : {food.foodName}</h3>
+                                    <p className="md:text-sm text-xs font-semibold my-2">Donar Name : {food?.donarName}</p>
+
+                                    <p className="md:text-sm text-xs font-semibold">Pickup Location : {food?.pickUpLocation}</p>
+
+                                    <p className="md:text-sm text-xs font-semibold my-2">Donation Amount : {food?.donateMoney} $</p>
+
+                                    <p className="md:text-sm text-red-500 text-xs font-semibold">Expired Date : {food?.expiredDate}</p>
+
+                                    <p className="md:text-sm  text-xs font-semibold my-2">Request Date : {food?.requestDate}</p>
+
+
+                                    <div className="flex justify-between gap-3 flex-wrap items-center">
+                                        <p className={`md:text-sm w-fit px-2 text-white py-1 ${food?.status === "Available" ? "bg-amber-500" : "bg-green-500"} rounded-lg text-xs font-semibold`}> Status : {food?.status}</p>
+
+                                        {
+                                            food?.status === "Available" ? <button
+                                                onClick={() => handleRemoveRequest(food._id)}
+                                                className="btn btn-sm capitalize bg-red-500 text-white hover:text-black">Cancel Request</button> : ""
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>)
+                        }
+                    </div> : <div className="md:col-span-2">
+                            <Lottie
+                                className="md:w-[30%] w-[80%] mx-auto"
+                                options={defaultOptions}
+                                animationData={animationData}
+                                height={200}
+                                width={200}
+                            ></Lottie>
+                            <h2 className="md:text-4xl text-2xl font-bold text-center text-green-500">You have no product Request!</h2>
+                        </div>
+
+                }
+
+
             </div>
         </div>
     );

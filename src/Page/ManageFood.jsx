@@ -3,15 +3,25 @@ import useAxiosSecure from "../hooks/useExiosSecure";
 import { AuthContext } from "../Provider/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import bgImage from "../assets/images/hand-giving-food-bowl-needy-person.jpg"
+import bgImage from "../assets/images/hand-giving-food-bowl-needy-person.jpg";
+import animationData from "../../public/Animation - 1699287520981.json";
 import "./style.css";
 import Swal from "sweetalert2";
+import Lottie from "lottie-react";
 
 const ManageFood = () => {
     const { user, logOut, setUser, setLoading } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
     const [myFoods, setMyFoods] = useState([]);
     const navigate = useNavigate();
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: "xMidYMid slice"
+        }
+    };
 
     useEffect(() => {
         axiosSecure.get(`/api/v1/manage-food?email=${user.email}`)
@@ -41,32 +51,32 @@ const ManageFood = () => {
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, delete it!"
-          }).then((result) => {
+        }).then((result) => {
             if (result.isConfirmed) {
-                
-                axiosSecure.delete(`/api/v1/foods/${id}`)
-                .then(res => {
-                    
-                    const filterFoods = myFoods.filter(food => food._id !== id);
-                    setMyFoods(filterFoods);
 
-                    if(res.data.deletedCount > 0) {
+                axiosSecure.delete(`/api/v1/foods/${id}`)
+                    .then(res => {
+
+                        const filterFoods = myFoods.filter(food => food._id !== id);
+                        setMyFoods(filterFoods);
+
+                        if (res.data.deletedCount > 0) {
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your file has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    }).catch(err => {
                         Swal.fire({
-                            title: "Deleted!",
-                            text: "Your file has been deleted.",
-                            icon: "success"
-                          });
-                    }
-                }).catch(err => {
-                    Swal.fire({
-                        icon: "error",
-                        title: "Oops...",
-                        text: err.message,
-                        footer: '<a href="#">Why do I have this issue?</a>'
-                      });
-                })
+                            icon: "error",
+                            title: "Oops...",
+                            text: err.message,
+                            footer: '<a href="#">Why do I have this issue?</a>'
+                        });
+                    })
             }
-          });
+        });
     }
 
 
@@ -108,36 +118,51 @@ const ManageFood = () => {
                                 {/* row 1 */}
 
                                 {
-                                    myFoods?.map(food => <>
-                                        <tr>
-                                            <td>
-                                                <div className="flex items-center space-x-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle w-12 h-12">
-                                                            <img src={food?.foodImage} alt="Avatar Tailwind CSS Component" />
+                                    myFoods.length > 0 ? <>
+                                        {
+                                            myFoods?.map(food => <>
+                                                <tr>
+                                                    <td>
+                                                        <div className="flex items-center space-x-3">
+                                                            <div className="avatar">
+                                                                <div className="mask mask-squircle w-12 h-12">
+                                                                    <img src={food?.foodImage} alt="Avatar Tailwind CSS Component" />
+                                                                </div>
+                                                            </div>
+                                                            <div>
+                                                                <div className="font-bold">{food?.foodName}</div>
+                                                                <div className="text-sm badge bg-lime-500 text-white">{food?.pickUpLocation}</div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                    <div>
-                                                        <div className="font-bold">{food?.foodName}</div>
-                                                        <div className="text-sm badge bg-lime-500 text-white">{food?.pickUpLocation}</div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span className="md:text-sm text-xs font-medium bg-lime-500 p-1 rounded-lg text-white">{food?.expiredDate}</span>
-                                            </td>
-                                            <td>
-                                                <div  className="flex h-full gap-4">
-                                                    <Link to={`/update-food/${food._id}`} className="btn btn-xs bg-lime-500 text-white rounded-lg">Update</Link>
-                                                    <button onClick={() => handleDelete(food?._id)} className="btn btn-xs bg-red-500 text-white rounded-lg">Delate</button>
-                                                </div>
-                                            </td>
-                                            <th>
-                                                <Link to={`/manage-food-request/${food._id}`} className="btn btn-ghost btn-xs border border-lime-500">Manage</Link>
-                                            </th>
-                                        </tr>
-                                    </>)
+                                                    </td>
+                                                    <td>
+                                                        <span className="md:text-sm text-xs font-medium bg-lime-500 p-1 rounded-lg text-white">{food?.expiredDate}</span>
+                                                    </td>
+                                                    <td>
+                                                        <div className="flex h-full gap-4">
+                                                            <Link to={`/update-food/${food._id}`} className="btn btn-xs bg-lime-500 text-white rounded-lg">Update</Link>
+                                                            <button onClick={() => handleDelete(food?._id)} className="btn btn-xs bg-red-500 text-white rounded-lg">Delate</button>
+                                                        </div>
+                                                    </td>
+                                                    <th>
+                                                        <Link to={`/manage-food-request/${food._id}`} className="btn btn-ghost btn-xs border border-lime-500">Manage</Link>
+                                                    </th>
+                                                </tr>
+                                            </>)
+                                        } </> : 
+                                        <div className="md:col-span-2">
+                                        <Lottie
+                                            className="md:w-[30%] w-[80%] mx-auto"
+                                            options={defaultOptions}
+                                            animationData={animationData}
+                                            height={200}
+                                            width={200}
+                                        ></Lottie>
+                                        <h2 className="md:text-4xl text-2xl font-bold text-center text-green-500">There is no product Request!</h2>
+                                    </div>
                                 }
+
+
                             </tbody>
                         </table>
                     </div>
