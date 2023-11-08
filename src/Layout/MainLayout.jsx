@@ -39,27 +39,27 @@ const MainLayout = () => {
     const navItems = <>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
+                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "containers"
             }
             to="/">Home<span></span></NavLink></li>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
+                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "containers"
             }
             to="/available-foods">Available Food<span></span></NavLink></li>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
+                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "containers"
             }
             to="/add-food">Add Food<span></span></NavLink></li>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
+                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "containers"
             }
             to="/manage-food">Manage My Food<span></span></NavLink></li>
         <li className="rounded-none"><NavLink
             className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "container"
+                isPending ? "pending" : isActive ? "border-b-2 rounded-none border-green-500" : "containers"
             }
             to="/food-request">My Food Request<span></span></NavLink></li>
     </>

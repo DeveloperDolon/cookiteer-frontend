@@ -4,6 +4,7 @@ import { axiosSecure } from "../hooks/useExiosSecure";
 import { Link } from "react-router-dom";
 import FoodItem from "../Component/FoodItem/FoodItem";
 import AboutUs from "../Component/About/AboutUs";
+import Team from "./Team";
 
 
 const Home = () => {
@@ -53,6 +54,10 @@ const Home = () => {
 
             <div>
                 <AboutUs></AboutUs>
+            </div>
+
+            <div className="max-w-7xl mx-auto">
+                <Team></Team>
             </div>
         </div>
     );

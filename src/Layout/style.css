@@ -1,19 +1,19 @@
 
-.container {
+.containers {
     position: relative;
     overflow: hidden;
 }
 
-.container-box {
+.containers-box {
     display: flex;
     gap: 20px;
 }
 
-.container-one {
+.containers-one {
     background-color: rgb(117, 13, 13);
 }
 
-.container::after {
+.containers::after {
     content: "";
     display: block;
     position: absolute;
@@ -26,7 +26,7 @@
     transition: 0.2s ease-in all;
 }
 
-.container::before {
+.containers::before {
     content: "";
     display: block;
     position: absolute;
@@ -39,7 +39,7 @@
     transition-delay: 0.4s;
 }
 
-.container span::after {
+.containers span::after {
     content: "";
     display: block;
     position: absolute;
@@ -52,7 +52,7 @@
     transition-delay: 0.6s;
 }
 
-.container span::before {
+.containers span::before {
     content: "";
     display: block;
     position: absolute;
@@ -67,23 +67,23 @@
 }
 
 
-.container:hover::after {
+.containers:hover::after {
     left: 0;
     width: 100%;
 }
 
-.container:hover::before {
+.containers:hover::before {
     right: 0;
     width: 100%;
 }
 
 
-.container:hover span::after {
+.containers:hover span::after {
     height: 100%;
     bottom: 0;
 }
 
-.container:hover span::before { 
+.containers:hover span::before { 
     height: 100%;
     top: 0;
 }
