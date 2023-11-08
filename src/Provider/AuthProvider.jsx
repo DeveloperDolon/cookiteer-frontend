@@ -11,7 +11,7 @@ const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const defaultImage = "https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
     const auth = getAuth(app);
-    const mainUrl = "http://localhost:5000";
+    const mainUrl = "https://assignment-11-server-pgpirj44e-dolons-projects.vercel.app";
 
     const createUser = (email, password) => {
         setLoading(true);

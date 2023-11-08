@@ -32,7 +32,7 @@ const MainRouter = createBrowserRouter([
             },
             {
                 path: "/food/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/api/v1/foods/${params.id}`),
+                loader: ({params}) => fetch(`https://assignment-11-server-pgpirj44e-dolons-projects.vercel.app/api/v1/foods/${params.id}`),
                 element: <PrivateRoute><SingleFood></SingleFood></PrivateRoute>
             },
             {
@@ -41,7 +41,7 @@ const MainRouter = createBrowserRouter([
             },
             {
                 path: "/update-food/:id",
-                loader: ({params}) => fetch(`http://localhost:5000/api/v1/foods/${params.id}`),
+                loader: ({params}) => fetch(`https://assignment-11-server-pgpirj44e-dolons-projects.vercel.app/api/v1/foods/${params.id}`),
                 element: <PrivateRoute><UpdateFood></UpdateFood></PrivateRoute>
             },
             {

@@ -24,7 +24,7 @@ const AboutUs = () => {
                         <h3 className="md:text-3xl text-xl title-text text-yellow-500 mt-5">Good food is all the sweeter when shared with good friends.</h3>
 
                         <p>
-                        Welcome to Cookiteer, the community table where every meal becomes a shared delight. We believe that food is more than just nourishment; it's a language that transcends words and connects souls. Our platform is dedicated to the magic that happens when people come together to share a meal.
+                        Welcome to Cookiteer, the community table where every meal becomes a shared delight. We believe that food is more than just nourishment; it&apos;s a language that transcends words and connects souls. Our platform is dedicated to the magic that happens when people come together to share a meal.
                         </p>
 
                         <p>
