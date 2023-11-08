@@ -4,6 +4,7 @@ import { axiosSecure } from "../hooks/useExiosSecure";
 import FoodItem from "../Component/FoodItem/FoodItem";
 import animationData from "../../public/Animation - 1699287520981.json";
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 
 const AvailableFoods = () => {
     const [category, setCategory] = useState("");
@@ -34,6 +35,10 @@ const AvailableFoods = () => {
 
     return (
         <div className="bg-[#fafafa]">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Available Foods</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 md:mb-32 mb-20">
                 <div className="pt-10 pb-5 relative flex">
                         <input onChange={(e) => setSearchQuery(e.target.value)} type="text" name="search" className="w-full md:py-5 py-3 md:text-base text-sm md:px-6 px-3 rounded-l-lg shadow-lg" placeholder="Search Food..." />

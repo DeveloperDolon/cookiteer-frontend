@@ -8,6 +8,7 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
 import { AuthContext } from "../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet";
 
 const Register = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -101,6 +102,10 @@ const Register = () => {
 
     return (
         <div className="login-container min-h-screen flex justify-center items-center px-3 py-5">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Register</title>
+            </Helmet>
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl glass">
             <Link to="/" className="px-3 py-1 text-red-500 font-semibold hover:underline">Go To Home</Link>
                 <form onSubmit={handleRegister} className="card-body mb-0 pb-0">

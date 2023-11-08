@@ -5,6 +5,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import toast from "react-hot-toast";
 import animationData from "../../public/Animation - 1699287520981.json";
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 
 
 const ManageFoodRequest = () => {
@@ -60,6 +61,10 @@ const ManageFoodRequest = () => {
 
     return (
         <div className="bg-[#fafafa]">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Manage Food Request</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 py-16">
                 <div style={{
                     background: `url('https://img.freepik.com/free-photo/people-bringing-supplies-neighbors_23-2149139793.jpg?w=740&t=st=1699384641~exp=1699385241~hmac=d79f4091ab0c8e10eabd6194e33585787d915f83a6bf42a58524c711befe6cf8') no-repeat center center`,

@@ -2,6 +2,7 @@ import moment from "moment";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { axiosSecure } from "../hooks/useExiosSecure";
+import { Helmet } from "react-helmet";
 
 
 const UpdateFood = () => {
@@ -39,6 +40,10 @@ const UpdateFood = () => {
 
     return (
         <div>
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Update Food</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3">
                 <div
                     style={{

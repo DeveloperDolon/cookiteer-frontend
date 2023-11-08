@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import Lottie from "lottie-react";
 import animationData from "../../public/Animation - 1699287520981.json";
+import { Helmet } from "react-helmet";
 
 
 const FoodRequest = () => {
@@ -59,6 +60,10 @@ const FoodRequest = () => {
 
     return (
         <div className="bg-[#fafafa]">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Food Request</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 py-16">
                 <div style={{
                     background: `url('https://img.freepik.com/free-photo/hand-giving-soup-bowl-needy-person_23-2148733816.jpg?w=740&t=st=1699379119~exp=1699379719~hmac=1f22f2d30ec62afd3e14eebe7840231f8ffbea1fb85757d59ec72a70c2783ab2') no-repeat center center`,

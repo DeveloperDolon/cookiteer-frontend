@@ -8,6 +8,7 @@ import animationData from "../../public/Animation - 1699287520981.json";
 import "./style.css";
 import Swal from "sweetalert2";
 import Lottie from "lottie-react";
+import { Helmet } from "react-helmet";
 
 const ManageFood = () => {
     const { user, logOut, setUser, setLoading } = useContext(AuthContext);
@@ -82,6 +83,10 @@ const ManageFood = () => {
 
     return (
         <div className="bg-[#fafafa] py-10">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Manage Food</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:p-0 md:px-5 px-3">
                 <div style={{
                     background: `url('${bgImage}') no-repeat center center`,

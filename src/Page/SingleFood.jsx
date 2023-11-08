@@ -6,6 +6,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import moment from "moment";
 import toast from "react-hot-toast";
 import { axiosSecure } from "../hooks/useExiosSecure";
+import { Helmet } from "react-helmet";
 
 const SingleFood = () => {
     const { defaultImage, user} = useContext(AuthContext);
@@ -58,6 +59,10 @@ const SingleFood = () => {
 
     return (
         <div className="bg-[#fafafa] md:pb-32 pb-20">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | {foodData?.foodName}</title>
+            </Helmet>
             <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3">
                 <div className="pt-16 grid md:grid-cols-4 grid-cols-1">
                     <div className="md:col-span-3">

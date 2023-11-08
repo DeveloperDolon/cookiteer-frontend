@@ -6,6 +6,7 @@ import FoodItem from "../Component/FoodItem/FoodItem";
 import AboutUs from "../Component/About/AboutUs";
 import Team from "./Team";
 import Testimonials from "./Testimonials";
+import { Helmet } from "react-helmet";
 
 
 const Home = () => {
@@ -15,12 +16,12 @@ const Home = () => {
     useEffect(() => {
         axiosSecure.get("/api/v1/foods?sortItem=foodQuantity&sort=dsc")
             .then(res => {
-                if(res.data.length > 6) {
+                if (res.data.length > 6) {
                     const foodsArr = res.data.slice(0, 6);
                     setFoods(foodsArr);
                     setSeeMoreFoods(true);
                     return;
-                } 
+                }
                 setFoods(res.data);
                 setSeeMoreFoods(false);
             })
@@ -29,8 +30,13 @@ const Home = () => {
 
     return (
         <div className="bg-[#fafafa]">
-            <Banner></Banner>
+            
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Home</title>
+            </Helmet>
 
+            <Banner></Banner>
 
             <div className="bg-[#fafafa]">
                 <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3 md:py-32 py-24">

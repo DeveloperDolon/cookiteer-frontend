@@ -3,6 +3,7 @@ import { AuthContext } from "../Provider/AuthProvider";
 import { axiosSecure } from "../hooks/useExiosSecure";
 import toast from "react-hot-toast";
 import moment from "moment/moment";
+import { Helmet } from "react-helmet";
 
 
 const AddFood = () => {
@@ -43,6 +44,10 @@ const AddFood = () => {
 
     return (
         <div className="max-w-7xl mx-auto lg:px-0 md:px-5 px-3">
+            <Helmet>
+                <meta charSet="utf-8" />
+                <title>Cookiteer | Add Product</title>
+            </Helmet>
             <div
                 style={{
                     background: "url('https://images.pexels.com/photos/4871119/pexels-photo-4871119.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1') no-repeat center",
