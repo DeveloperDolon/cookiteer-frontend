@@ -11,6 +11,7 @@ import ManageFood from "../Page/ManageFood";
 import UpdateFood from "../Page/UpdateFood";
 import FoodRequest from "../Page/FoodRequest";
 import ManageFoodRequest from "../Page/ManageFoodRequest";
+import ErrorPage from "../Page/ErrorPage";
 
 const MainRouter = createBrowserRouter([
     {
@@ -60,6 +61,10 @@ const MainRouter = createBrowserRouter([
     {
         path: "/register",
         element: <Register></Register>
+    },
+    {
+        path: "/*",
+        element: <ErrorPage></ErrorPage>
     }
 ])
 
