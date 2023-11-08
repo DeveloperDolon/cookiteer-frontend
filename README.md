@@ -1,5 +1,8 @@
 # live Link : https://assignment-11-4dcde.web.app/
 
+
+# Five Features Of This Web Site
+
 **Food Listing and Search :** Users can easily browse and search for available free food listings. They can search for specific food items by name and use sorting options to filter listings by order, time, or quantity. This feature makes it convenient for users to find the food they need quickly.
 
 **User Authentication :** The website requires user authentication, ensuring that only registered and logged-in users can access its features. This helps maintain privacy and security while also enabling users to interact with the platform effectively.
