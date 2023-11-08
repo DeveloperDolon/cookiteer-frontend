@@ -14,7 +14,7 @@ const Login = () => {
     const [passValidMsg, setPassValidMsg] = useState("Password need to include length 8, Special Character, Capital Letter, Number!");
     const [isValid, setIsValid] = useState(false);
     const verifyRef = useRef();
-    const {loginWithEmailAndPassword} = useContext(AuthContext);
+    const {loginWithEmailAndPassword, googleLogin} = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleValidPassword = (e) => {
@@ -71,6 +71,16 @@ const Login = () => {
             setPassValidMsg("Your password is valid!");
             setIsValid(true)
         }
+    }
+
+    const handleGoogleLogin = () => {
+        const googleLogId = toast.loading("Finding User...");
+
+        googleLogin()
+        .then(() => {
+            toast.success("User Logged in Successfully!!", { id: googleLogId });
+            navigate("/");
+        }).catch(err => toast.error(err.message, {id: googleLogId}))
     }
 
     const handleLogin = (e) => {
@@ -156,7 +166,7 @@ const Login = () => {
                 </form>
 
                 <div className="flex justify-center gap-5 pt-3 pb-5">
-                    <button className="btn social-login-btn w-fit duration-500"><FcGoogle className="md:text-3xl text-xl"></FcGoogle>
+                    <button onClick={handleGoogleLogin} className="btn social-login-btn w-fit duration-500"><FcGoogle className="md:text-3xl text-xl"></FcGoogle>
                     <span>Google Login</span>
                     </button>
                     <button className="btn social-login-btn w-fit duration-500"><BsGithub className="md:text-3xl text-xl"></BsGithub>

@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 
 export const axiosSecure = axios.create({
-    baseURL: "https://assignment-11-server-pgpirj44e-dolons-projects.vercel.app",
+    baseURL: "https://assignment-11-server-m88i9w41i-dolons-projects.vercel.app",
     withCredentials: true,
 });
 
