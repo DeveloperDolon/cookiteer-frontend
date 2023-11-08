@@ -67,11 +67,11 @@ const MainLayout = () => {
     return (
         <div onClick={handleClick}>
 
-            <div className="drawer">
+            <div className="drawer relative">
                 <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content flex flex-col">
                     {/* Navbar */}
-                    <div className="">
+                    <div className="sticky top-0 mt-2 z-50 bg-white">
                         <div className="w-full navbar max-w-7xl mx-auto justify-between">
                             <div className="flex-none lg:hidden">
                                 <label htmlFor="my-drawer-3" aria-label="open sidebar" className="btn btn-square btn-ghost">
