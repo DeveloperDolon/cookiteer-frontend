@@ -1,18 +1,18 @@
 import { createContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import app from "../firebase/firebase.config";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider, ProviderId } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 import axios from "axios";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({children}) => {
-    const googleProvider = GoogleAuthProvider();
+    const googleProvider = new GoogleAuthProvider();
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
     const defaultImage = "https://t4.ftcdn.net/jpg/00/65/77/27/240_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg";
     const auth = getAuth(app);
-    const mainUrl = "https://assignment-11-server-m88i9w41i-dolons-projects.vercel.app";
+    const mainUrl = "https://assignment-11-server-mu-one.vercel.app";
 
     const createUser = (email, password) => {
         setLoading(true);

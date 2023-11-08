@@ -1,2 +1,11 @@
+# live Link : https://assignment-11-4dcde.web.app/
 
-i have an web site for free food sharing. This have a home section , home section contain featured food section there have 6 food with maximum quantity. There have All available route to see all foods and there have searching option for search with name and there have sorting option with order and time or quantity. Every food card have view details button for see details of food. This is a private route if user are not logged in user cannot vesite this site. There have add food route for adding food. User can request food. User can see all requested food on My  Food Request route. User can manage product from Manage My Product Route. User can update or delete food from there and user can hadle all request for this product. Every user can see requested product status. If donar change status then user can show requested food status Delivered. Now tell me  5 feature of this web site
+**Food Listing and Search :** Users can easily browse and search for available free food listings. They can search for specific food items by name and use sorting options to filter listings by order, time, or quantity. This feature makes it convenient for users to find the food they need quickly.
+
+**User Authentication :** The website requires user authentication, ensuring that only registered and logged-in users can access its features. This helps maintain privacy and security while also enabling users to interact with the platform effectively.
+
+**Food Donation and Request System :** Users can both donate food and request food from the platform. Donors can add food listings, while those in need can request specific food items. This two-way system facilitates the sharing of food resources within the community.
+
+**Food Management :** The "Manage My Product" route allows users to update or delete the food listings they have added. This feature gives donors control over the food they are offering and helps them keep their listings up to date.
+
+**Request Status Tracking :** Users can monitor the status of their food requests. If a donor changes the status to "Delivered," the user is informed that the requested food is on its way, enhancing transparency and communication between donors and recipients.
