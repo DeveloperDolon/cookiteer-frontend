@@ -3,6 +3,7 @@ import Banner from "../Component/Banner/Banner";
 import { axiosSecure } from "../hooks/useExiosSecure";
 import { Link } from "react-router-dom";
 import FoodItem from "../Component/FoodItem/FoodItem";
+import AboutUs from "../Component/About/AboutUs";
 
 
 const Home = () => {
@@ -25,7 +26,7 @@ const Home = () => {
     }, []);
 
     return (
-        <div>
+        <div className="bg-[#fafafa]">
             <Banner></Banner>
 
 
@@ -48,6 +49,10 @@ const Home = () => {
                         }
                     </div>
                 </div>
+            </div>
+
+            <div>
+                <AboutUs></AboutUs>
             </div>
         </div>
     );
