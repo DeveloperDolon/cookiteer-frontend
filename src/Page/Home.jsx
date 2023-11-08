@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import FoodItem from "../Component/FoodItem/FoodItem";
 import AboutUs from "../Component/About/AboutUs";
 import Team from "./Team";
+import Testimonials from "./Testimonials";
 
 
 const Home = () => {
@@ -58,6 +59,10 @@ const Home = () => {
 
             <div className="max-w-7xl mx-auto">
                 <Team></Team>
+            </div>
+
+            <div>
+                <Testimonials></Testimonials>
             </div>
         </div>
     );
