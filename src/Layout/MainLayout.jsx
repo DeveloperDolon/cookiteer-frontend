@@ -4,8 +4,8 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
 import { CiLogout } from 'react-icons/ci';
 import toast from "react-hot-toast";
-import axios from "axios";
 import Footer from "../Component/Footer/Footer";
+import { axiosSecure } from "../hooks/useExiosSecure";
 
 const MainLayout = () => {
 
@@ -23,7 +23,7 @@ const MainLayout = () => {
         logOut()
         .then(() => {
 
-            axios.post(`${mainUrl}/api/v1/logout`,{user: user?.email}, {withCredentials: true})
+            axiosSecure.post(`${mainUrl}/api/v1/logout`,{user: user?.email})
             .then(res => {
                 console.log(res);
                 setLoading(false);
