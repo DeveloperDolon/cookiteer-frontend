@@ -1,5 +1,6 @@
 # live Link : https://assignment-11-4dcde.web.app/
 
+**Technologies :** React js, Tailwind css, Daisy UI, Firebase, JWT, Node js, Express js, and Mongodb.
 
 # Five Features Of This Web Site
 
